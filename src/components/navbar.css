@@ -1,0 +1,32 @@
+.navbar {
+  background-color: var(--color-secondary);
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar li a:hover {
+  background-color: var(--color-primary);
+  border-radius: 50px;
+}

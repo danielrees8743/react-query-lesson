@@ -1,5 +1,6 @@
 import './App.css';
 import { useQuery } from '@tanstack/react-query';
+import Navbar from './components/Navbar';
 
 const fetchRickandMorty = async () => {
   const response = await fetch('https://rickandmortyapi.com/api/character/');
