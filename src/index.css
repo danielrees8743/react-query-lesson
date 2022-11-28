@@ -16,3 +16,8 @@ body {
 code {
   font-family: 'Titillium Web', sans-serif;
 }
+h1 {
+  font-size: 3.4rem;
+  color: var(--color-secondary);
+  margin: 0;
+}
