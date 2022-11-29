@@ -1,5 +1,6 @@
 import '../../App.css';
-import { useQuery } from '@tanstack/react-query';
+//TODO : Import React Query
+
 import Character from '../../components/Character';
 
 const fetchRickandMorty = async () => {
@@ -8,19 +9,12 @@ const fetchRickandMorty = async () => {
 };
 
 function Home() {
-  const { data, status } = useQuery(['rickAndMorty'], fetchRickandMorty);
+  //TODO : Use React Query to fetch the data from the API
 
   return (
     <div className="App">
       <h1>React Query</h1>
-      {status === 'loading' && <div>Loading data...</div>}
-      {status === 'error' && <div>Error fetching data</div>}
-      {data &&
-        data.results.map((character) => (
-          <div key={character.id}>
-            <Character character={character} />
-          </div>
-        ))}
+      {/* //TODO : Use the Character component to display the character */}
     </div>
   );
 }
