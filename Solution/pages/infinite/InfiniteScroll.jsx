@@ -7,26 +7,21 @@ const initUrl = 'https://rickandmortyapi.com/api/character/';
 
 const fetchCharacters = async (url) => {
   const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error('Something went wrong!');
-  }
-  return await response.json();
+  return response.json();
 };
 
 const InfiniteScroller = () => {
-  const { data, isError, isLoading, fetchNextPage, hasNextPage } =
-    useInfiniteQuery(
-      ['rickAndMorty'],
-      ({ pageParam = initUrl }) => fetchCharacters(pageParam),
-      { getNextPageParam: (lastPage) => lastPage.info.next || undefined }
-    );
-
-  if (isLoading) return <div>Loading data...</div>;
-  if (isError) return <div>Error fetching data</div>;
+  const { data, status, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    ['rickAndMortyInfinite'],
+    ({ pageParam = initUrl }) => fetchCharacters(pageParam),
+    { getNextPageParam: (lastPage) => lastPage.info.next || undefined }
+  );
 
   return (
     <div className="infinite">
       <h1>Infinite Scroll</h1>
+      {status === 'loading' && <div>Loading data...</div>}
+      {status === 'error' && <div>Error fetching data</div>}
       <InfiniteScroll
         loadMore={fetchNextPage}
         hasMore={hasNextPage}
@@ -36,7 +31,7 @@ const InfiniteScroller = () => {
           data.pages.map((page) => {
             return page.results.map((character) => (
               <div key={character.id}>
-                <Character character={character} />
+                <Character character={character} key={character.id} />
               </div>
             ));
           })}
