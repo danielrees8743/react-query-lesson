@@ -1,6 +1,7 @@
 import './infiniteScroller.css';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from 'react-infinite-scroll-up-n-down';
+import Character from '../../components/Character';
 
 const initUrl = 'https://rickandmortyapi.com/api/character/';
 
@@ -26,15 +27,16 @@ const InfiniteScroller = () => {
   return (
     <div className="infinite">
       <h1>Infinite Scroll</h1>
-      <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
+      <InfiniteScroll
+        loadMore={fetchNextPage}
+        hasMore={hasNextPage}
+        loader={<h4>Loading...</h4>}
+      >
         {data &&
           data.pages.map((page) => {
             return page.results.map((character) => (
-              <div key={character.id} className="characters">
-                <p>
-                  {character.name} - <span>{character.species}</span>
-                </p>
-                <img src={character.image} alt="" />
+              <div key={character.id}>
+                <Character character={character} />
               </div>
             ));
           })}
