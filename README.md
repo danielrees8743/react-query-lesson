@@ -38,10 +38,19 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 <br>
 
+You will have the basic boilerplate code for the app. You can start working on the challenge now. When you run the app, you will see nothing rendered on the screen. This is because we haven't fetched any data yet.
+
 # React Query Challenges
 
 We will be using the Rick and Morty API to fetch some data using React Query. The API is available at [https://rickandmortyapi.com/](https://rickandmortyapi.com/)
 <br>
+
+---
+
+<br>
+
+![Rick](https://rickandmortyapi.com/api/character/avatar/1.jpeg)
+![Morty](https://rickandmortyapi.com/api/character/avatar/2.jpeg)
 
 ## There are three challenges in this repo
 
@@ -51,106 +60,61 @@ We will be using the Rick and Morty API to fetch some data using React Query. Th
 
 The challenges are tough but you can do it. You can also check out the solutions in the `solutions` branch.
 
-## Challenge 1
+## Challenge 1 - A Fetch
 
-In this challenge, we will be fetching a list of characters from the API. The API endpoint is [https://rickandmortyapi.com/api/character/](https://rickandmortyapi.com/api/character/)
+### level: easy
 
-### Step 1
-
-Create a new component called `Characters` and import `useQuery` from `react-query`
-
-```jsx
-import { useQuery } from '@tanstack/react-query';
-```
-
-### Step 2
-
-Create a new function called `fetchCharacters` and use `fetch` to fetch the data from the API. The function should return the data from the API.
-
-```jsx
-const fetchCharacters = async () => {
-  const res = await fetch('https://rickandmortyapi.com/api/character/');
-  return res.json();
-};
-```
-
-### Step 3
-
-Create a new query using `useQuery` and pass the `fetchCharacters` function as the first argument. The second argument is an object with the `refetchInterval` property. Set the `refetchInterval` to `1000` to refetch the data every second.
-
-```jsx
-const { data, status } = useQuery('characters', fetchCharacters);
-```
-
-### Step 4
-
-Create a new component called `Character` and pass the `character` as a prop. The component should return the `name` of the character.
-
-```jsx
-const Character = ({ character }) => {
-  return <div>{character.name}</div>;
-};
-```
-
-### Step 5
-
-Create a new component called `CharactersList` and pass the `characters` as a prop. The component should return a list of `Character` components.
-
-```jsx
-const CharactersList = ({ characters }) => {
-  return (
-    <div>
-      {characters.map((character) => (
-        <Character key={character.id} character={character} />
-      ))}
-    </div>
-  );
-};
-```
-
-### Step 6
-
-Create a new component called `Characters` and pass the `characters` as a prop. The component should return a list of `Character` components.
-
-```jsx
-const Characters = () => {
-  const { data, status } = useQuery('characters', fetchCharacters);
-
-  return (
-    <div>
-      <h2>Characters</h2>
-      {status === 'loading' && <div>Loading data...</div>}
-      {status === 'error' && <div>Error fetching data</div>}
-      {status === 'success' && <CharactersList characters={data.results} />}
-    </div>
-  );
-};
-```
-
-### Step 7
-
-Export the `Characters` component and import it in the `App` component.
-
-```jsx
-import Characters from './Characters';
-```
-
-### Step 8
-
-Render the `Characters` component in the `App` component.
-
-```jsx
-function App() {
-  return (
-    <div className="App">
-      <Characters />
-    </div>
-  );
-}
-```
-
-### Step 9
-
-Run the app using `npm start` and you should see a list of characters.
+#### Work on the `Home.jsx` file found in the `src/pages` folder
 
 <br>
+
+In this challenge, we will be fetching a list of characters from the API. The API endpoint is [https://rickandmortyapi.com/api/character/](https://rickandmortyapi.com/documentation)
+
+You just need to fetch the data from the API using React Query and the characters should be show on the screen if you have done everything correctly.
+
+---
+
+<br>
+
+## Challenge 2 - Pagination
+
+### level: medium
+
+#### Work on the `Pagination.jsx` file found in the `src/pages` folder
+
+<br>
+
+In this challenge, we will be fetching the data from the same API endpoint and implement pagination. We will be fetching 20 characters at a time and we will be fetching more characters when the user clicks on the `Next Page` button. The user should be able to go back to the `previous page` as well.
+
+🎯 **Bonus**: Implement a `disable function` that disables the button when there are no more characters to fetch, on both buttons `Next Page` and `Previous Page` buttons.
+
+Link to [Pagination](https://rickandmortyapi.com/documentation/#info-and-pagination) documentation
+
+Link to [React Query pagination](https://tanstack.com/query/v4/docs/guides/paginated-queries) documentation
+
+![Pagination](./src/assets/pagination.png)
+
+## Challenge 3 - Infinite Scroll
+
+### level: hard
+
+#### Work on the `InfiniteScroll.jsx` file found in the `src/pages` folder
+
+<br>
+
+In this challenge, we will be fetching the data from the same API endpoint and implement infinite scrolling. We will be fetching 20 characters at a time and we will be fetching more characters when the user scrolls down to the bottom of the page. The next page of characters should be fetched automatically when the user scrolls down to the bottom of the page. When the user scrolls up, the previous page of characters should be fetched automatically.
+
+This one is a bit tricky, You'll need to use another npm package, I used [react-infinite-scroll-up-n-down](https://www.npmjs.com/package/react-infinite-scroll-up-n-down) for this challenge. You can use any other package you want. I found this package to be the easiest to use.
+
+This challenge is a bit tricky, but you can do it. You can also check out the solutions in the `solutions` folder.
+
+## Useful Links
+
+- [React Query Documentation](https://tanstack.com/query/v4/docs/overview)
+- [React Query Devtools](https://tanstack.com/query/v4/docs/devtools)
+- [Net Ninja React Query Playlist](https://www.youtube.com/watch?v=x1rQ61otgtU&list=PL4cUxeGkcC9jpi7Ptjl5b50p9gLjOFani)
+- [Codevolution React Query Playlist](https://www.youtube.com/playlist?list=PLC3y8-rFHvwjTELCrPrcZlo6blLBUspd2)
+
+## Extensions
+
+- [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
