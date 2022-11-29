@@ -13,6 +13,12 @@ React Query is a library for fetching, caching and updating asynchronous data in
 npm install @tanstack/react-query
 ```
 
+## Installation for Devtools
+
+```bash
+npm install @tanstack/react-query-devtools
+```
+
 ---
 
 ## Documentation
@@ -88,7 +94,7 @@ const { data, status } = useQuery(['rickAndMorty'], fetchCharacters);
 
 ### Step 4
 
-Import the Character component from `src/components/Character` and render the data in the `Character` component.
+Import the Character component from `src/components/Character` and render the data in the `Character` component. You can use the status results to render a loading message or a error message.
 
 ```jsx
 const Home = () => {
