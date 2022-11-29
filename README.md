@@ -1,70 +1,156 @@
-# Getting Started with Create React App
+![logo](./src/assets/repo-dark-removebg.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Query
+
+[![npm version](https://badge.fury.io/js/react-query.svg)](https://badge.fury.io/js/react-query)
+[![npm](https://img.shields.io/npm/dm/react-query.svg)](https://www.npmjs.com/package/react-query)
+
+React Query is a library for fetching, caching and updating asynchronous data in React. It makes data fetching simple, efficient and declarative. It also provides powerful tools for tracking the status and updating of your data. It is also a great companion to React Query Devtools. It is built on top of the Fetch API and supports all modern browsers.
+
+## Installation
+
+```bash
+npm install @tanstack/react-query
+```
+
+---
+
+## Documentation
+
+[https://react-query.tanstack.com](https://react-query.tanstack.com)
+
+---
 
 ## Available Scripts
 
-In the project directory, you can run:
+```bash
+npm install
+```
 
-### `npm start`
+install all dependencies
+
+```bash
+npm start
+```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `npm test`
+# React Query Challenges
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We will be using the Rick and Morty API to fetch some data using React Query. The API is available at [https://rickandmortyapi.com/](https://rickandmortyapi.com/)
+<br>
 
-### `npm run build`
+## There are three challenges in this repo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Fetching a list of characters from the API
+2. Pagination, fetching more characters with button click
+3. Infinite scrolling, fetching more characters as you scroll down
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The challenges are tough but you can do it. You can also check out the solutions in the `solutions` branch.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Challenge 1
 
-### `npm run eject`
+In this challenge, we will be fetching a list of characters from the API. The API endpoint is [https://rickandmortyapi.com/api/character/](https://rickandmortyapi.com/api/character/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Step 1
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a new component called `Characters` and import `useQuery` from `react-query`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```jsx
+import { useQuery } from '@tanstack/react-query';
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Step 2
 
-## Learn More
+Create a new function called `fetchCharacters` and use `fetch` to fetch the data from the API. The function should return the data from the API.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```jsx
+const fetchCharacters = async () => {
+  const res = await fetch('https://rickandmortyapi.com/api/character/');
+  return res.json();
+};
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Step 3
 
-### Code Splitting
+Create a new query using `useQuery` and pass the `fetchCharacters` function as the first argument. The second argument is an object with the `refetchInterval` property. Set the `refetchInterval` to `1000` to refetch the data every second.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```jsx
+const { data, status } = useQuery('characters', fetchCharacters);
+```
 
-### Analyzing the Bundle Size
+### Step 4
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Create a new component called `Character` and pass the `character` as a prop. The component should return the `name` of the character.
 
-### Making a Progressive Web App
+```jsx
+const Character = ({ character }) => {
+  return <div>{character.name}</div>;
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Step 5
 
-### Advanced Configuration
+Create a new component called `CharactersList` and pass the `characters` as a prop. The component should return a list of `Character` components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```jsx
+const CharactersList = ({ characters }) => {
+  return (
+    <div>
+      {characters.map((character) => (
+        <Character key={character.id} character={character} />
+      ))}
+    </div>
+  );
+};
+```
 
-### Deployment
+### Step 6
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Create a new component called `Characters` and pass the `characters` as a prop. The component should return a list of `Character` components.
 
-### `npm run build` fails to minify
+```jsx
+const Characters = () => {
+  const { data, status } = useQuery('characters', fetchCharacters);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  return (
+    <div>
+      <h2>Characters</h2>
+      {status === 'loading' && <div>Loading data...</div>}
+      {status === 'error' && <div>Error fetching data</div>}
+      {status === 'success' && <CharactersList characters={data.results} />}
+    </div>
+  );
+};
+```
+
+### Step 7
+
+Export the `Characters` component and import it in the `App` component.
+
+```jsx
+import Characters from './Characters';
+```
+
+### Step 8
+
+Render the `Characters` component in the `App` component.
+
+```jsx
+function App() {
+  return (
+    <div className="App">
+      <Characters />
+    </div>
+  );
+}
+```
+
+### Step 9
+
+Run the app using `npm start` and you should see a list of characters.
+
+<br>

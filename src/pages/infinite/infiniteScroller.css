@@ -1,0 +1,36 @@
+.infinite {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+h1 {
+  font-size: 3.4rem;
+  color: var(--color-secondary);
+  margin: 0;
+}
+
+.characters {
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* flex-direction: column; */
+  align-items: center;
+  border: 10px double rgb(160, 160, 160);
+  padding: 2rem;
+  margin: 20px auto;
+  width: 65%;
+}
+.characters img {
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+.characters p {
+  text-align: center;
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.characters span {
+  color: green;
+}
