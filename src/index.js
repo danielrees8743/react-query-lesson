@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Pagination from './pages/pagination/Pagination';
-import InfinateScroll from './pages/infinate/InfinateScroll';
+import InfiniteScroller from './pages/infinate/InfiniteScroll';
 
 const queryClient = new QueryClient();
 
@@ -20,7 +20,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/pagination" element={<Pagination />} />
-          <Route path="/infinite-scroll" element={<InfinateScroll />} />
+          <Route path="/infinite-scroll" element={<InfiniteScroller />} />
           {/* <App /> */}
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />

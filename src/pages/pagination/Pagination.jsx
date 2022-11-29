@@ -31,8 +31,6 @@ const Pagination = () => {
     return <div style={{ color: 'red' }}>Error fetching data</div>;
   }
 
-  console.log(data);
-
   return (
     <div className="pagination">
       <h1>Pagination</h1>
