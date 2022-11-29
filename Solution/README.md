@@ -51,7 +51,9 @@ We will be using the Rick and Morty API to fetch some data using React Query. Th
 
 The challenges are tough but you can do it. You can also check out the solutions in the `solutions` branch.
 
-## Challenge 1
+<br>
+
+# Challenge 1
 
 ### Work from the `Home.jsx` file in the `src/pages/Home` folder
 
@@ -78,7 +80,7 @@ const fetchCharacters = async () => {
 
 ### Step 3
 
-Create a new query using `useQuery` and pass the `fetchCharacters` function as the first argument
+Create a new query using `useQuery` and pass the `fetchCharacters` function as the first argument inside your Home component.
 
 ```jsx
 const { data, status } = useQuery(['rickAndMorty'], fetchCharacters);
@@ -90,7 +92,7 @@ Import the Character component from `src/components/Character` and render the da
 
 ```jsx
 const Home = () => {
-  const { data, status } = useQuery(['characters'], fetchCharacters);
+  const { data, status } = useQuery(['rickAndMorty'], fetchCharacters);
 
   return (
     <div>
@@ -114,11 +116,7 @@ If you have done everything correctly, you should see a list of characters on th
 
 <br>
 
----
-
-<br>
-
-## Challenge 2 - Pagination
+# Challenge 2 - Pagination
 
 ### Work from the `Pagination` file in the `src/pages/pagination` folder
 
@@ -180,10 +178,7 @@ const { data, status } = useQuery(
 You should see a list of characters on the page. Now we need to create a button to fetch more characters. Create a new function called `handleNextPage` and increment the page number by 1.
 
 ```jsx
-<button
-  onClick={() => setPage((old) => Math.max(old - 1, 1))}
-  disabled={page === 1}
->
+<button onClick={() => setPage((old) => old - 1)} disabled={page === 1}>
   Previous Page
 </button>
 ```
@@ -205,17 +200,15 @@ You should see a list of characters on the page. Now we need to create a button 
 </button>
 ```
 
-### Step 7
+### Step 8
 
 Test out the app. You should be able to fetch more characters with the button click, and the previous data should be kept while fetching the next page 👏
 
-## Challenge 3 - Infinite Scrolling
+<br>
+
+# Challenge 3 - Infinite Scrolling
 
  <br>
-
----
-
-<br>
 
 ### Work from the `InfiniteScrolling` file in the `src/pages/infinite-scrolling` folder
 
