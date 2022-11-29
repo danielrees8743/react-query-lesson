@@ -1,6 +1,7 @@
 import './pagination.css';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import Character from '../../components/Character';
 
 const fetchCharacters = async (page) => {
   const response = await fetch(
@@ -55,11 +56,8 @@ const Pagination = () => {
       </button>
       {data &&
         data.results.map((character) => (
-          <div key={character.id} className="characters">
-            <p>
-              {character.name} - <span>{character.species}</span>
-            </p>
-            <img src={character.image} alt="" />
+          <div key={character.id}>
+            <Character character={character} />
           </div>
         ))}
     </div>

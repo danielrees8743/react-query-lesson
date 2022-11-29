@@ -1,9 +1,9 @@
 import './App.css';
 import { useQuery } from '@tanstack/react-query';
+import Character from './components/Character';
 
 const fetchRickandMorty = async () => {
   const response = await fetch('https://rickandmortyapi.com/api/character/');
-  console.log(response);
   if (!response.ok) {
     throw new Error('Something went wrong!');
   }
@@ -11,26 +11,28 @@ const fetchRickandMorty = async () => {
 };
 
 function App() {
-  const { data, isError, isLoading } = useQuery(
+  const { data, isError, isLoading, error } = useQuery(
     ['rickAndMorty'],
     fetchRickandMorty
   );
 
-  if (isLoading) return <div>Loading data...</div>;
-  if (isError) return <div>Error fetching data</div>;
+  console.log(data && data);
 
-  console.log(data);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>{error.message}</div>;
+  }
 
   return (
     <div className="App">
       <h1>React Query</h1>
       {data &&
         data.results.map((character) => (
-          <div key={character.id} className="characters">
-            <p>
-              {character.name} - <span>{character.species}</span>
-            </p>
-            <img src={character.image} alt="" />
+          <div key={character.id}>
+            <Character character={character} />
           </div>
         ))}
     </div>
